@@ -16,8 +16,8 @@ for (num2 = num1 + 1; num2 < 9; num2++)
 {
 for (num3 = num2 + 1; num3 < 10; num3++)
 {
-putchar('0' + (num3 % 10));
-putchar('0' + (num3 % 10));
+putchar('0' + (num1 % 10));
+putchar('0' + (num2 % 10));
 putchar('0' + (num3 % 10));
 if (num1 != 7 && num2 != 8 && num3 != 9)
 putchar(',');
