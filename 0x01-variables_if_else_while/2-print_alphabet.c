@@ -10,5 +10,6 @@ int main(void)
 {
 char ch;
 putchar(tolower(ch));
+putchar('\n');
 return (0);
 }
