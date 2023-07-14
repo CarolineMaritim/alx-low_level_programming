@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stlib.h>
+#include <ctype.h>
 /**
  * main - pogram the prints alphabet in lowercase
  *
