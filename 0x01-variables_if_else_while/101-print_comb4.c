@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stlib.h>
 /**
  * main - program the prints thre combination of digits
  *
