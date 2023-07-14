@@ -20,7 +20,6 @@ putchar('0' + (num3 % 10));
 putchar('0' + (num3 % 10));
 putchar('0' + (num3 % 10));
 if (num1 != 7 && num2 != 8 && num3 != 9)
-continue;
 putchar(',');
 putchar(' ');
 }
