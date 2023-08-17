@@ -12,5 +12,5 @@ do
 action(*array);
 array++;
 }
-while (size-- > 0);
+while (--size > 0);
 }
