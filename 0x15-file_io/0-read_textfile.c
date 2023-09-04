@@ -34,6 +34,10 @@ if (open_fd == -1 || read_fd == -1 || write_fd == -1 || write_fd != read_fd)
 	free(buf);/*memory mngt*/
 	return (0);
 }
+open_fd = open(filename, O_RDONLY);/*return value is an fd*/
+read_fd = read(open_fd, buf, letters);/*reads byte count*/
+write_fd = write(STDIN_FILENO, buf, read_fd);/*POSIX symbolli constants*/
+
 free(buf);
 close(open_fd);
 return (write_fd);
