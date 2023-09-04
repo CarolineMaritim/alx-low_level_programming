@@ -76,6 +76,7 @@ if (dest == -1 || write_fd == -1)
 read_fd = read(source, buf, 1024);
 dest = open(argv[2], O_WRONLY | O_APPEND);
 } while (read_fd > 0);
+free(buf);
 close(source);
 close(dest);
 return (0);
