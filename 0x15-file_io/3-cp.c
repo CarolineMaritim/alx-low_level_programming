@@ -58,8 +58,7 @@ if (argc != 3)
 buf = create_content(argv[2]);/*filename is created on second arg passed*/
 source = open(argv[1], O_RDONLY);
 read_fd = read(source, buf, 1024);
-dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC,
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 do{
 if (source == -1 || read_fd == -1)
 {
