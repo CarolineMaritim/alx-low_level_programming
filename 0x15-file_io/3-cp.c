@@ -60,22 +60,23 @@ source = open(argv[1], O_RDONLY);
 read_fd = read(source, buf, 1024);
 dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-while ((read_fd = read(source, buf, 1024)) > 0)
-{
-write_fd = write(dest, buf, 1024);
+do{
 if (source == -1 || read_fd == -1)
 {
 	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 	free(buf);/*memory mngt*/
 	exit(98);
 }
-}
+write_fd = write(dest, buf, 1024);
 if (dest == -1 || write_fd == -1)
 {
 	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 	free(buf);
 	exit(99);
 }
+read_fd = read(source, buf, 1024);
+dest = open(argv[2], O_WRONLY | O_APPEND);
+} while (read_fd > 0);
 close(source);
 close(dest);
 return (0);

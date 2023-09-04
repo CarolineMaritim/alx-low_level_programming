@@ -5,10 +5,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-void elf_checker(unsigned char *file);
-void write_magic(unsigned char *file);
-void write_class(unsigned char *file);
-void write_data(unsigned char *file);
+void elf_checker(unsigned char *e_ident);
+void write_magic(unsigned char *e_ident);
+void write_class(unsigned char *e_ident);
+void write_data(unsigned char *e_ident);
 void write_version(unsigned char *file);
 void write_abiversion(unsigned char *file);
 void write_os_abi(unsigned char *file);
@@ -168,16 +168,16 @@ printf("  ABI Version:                       %d\n",
 file[EI_ABIVERSION]);
 }
 /**
- * writfile_type - Prints the type of an ELF header.
- * @file_type: The ELF type.
+ * write_type - Prints the type of an ELF header.
+ * @e_type: The ELF type.
  * @file:  A pointer to content checked.
  */
-void writfile_type(unsigned int file_type, unsigned char *file)
+void write_type(unsigned int e_type, unsigned char *file)
 {
 if (file[EI_DATA] == ELFDATA2MSB)
-file_type >>= 8;
+e_type >>= 8;
 printf("  Type:                              ");
-switch (file_type)
+switch (e_type)
 {
 case ET_NONE:
 printf("NONE (None)\n");
@@ -195,7 +195,7 @@ case ET_CORE:
 printf("CORE (Core file)\n");
 break;
 default:
-printf("<unknown: %x>\n", file_type);
+printf("<unknown: %x>\n", e_type);
 }
 }
 /**
@@ -241,6 +241,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 Elf64_Ehdr *header;
 int open_fd, read_fd;
+
 open_fd = open(argv[1], O_RDONLY);
 if (open_fd == -1)
 {
@@ -255,7 +256,7 @@ dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 exit(98);
 }
 read_fd = read(open_fd, header, sizeof(Elf64_Ehdr));
-if (r == -1)
+if (read_fd == -1)
 {
 free(header);
 close_elf(open_fd);
@@ -269,9 +270,9 @@ write_magic(header->file);
 write_class(header->file);
 write_data(header->file);
 write_version(header->file);
-write_os_abi(header->file);
-write_abiversion(header->file);
-write_type(header->file_type, header->file);
+write_os_abi(header->e_ident);
+write_abiversion(header->e_version);
+write_type(header->e_type, header->file);
 write_entrypoint(header->e_entry, header->file);
 free(header);
 close_elf(open_fd);
