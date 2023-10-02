@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 	source = open(argv[1], O_RDONLY);
 	read_fd = read(source, buf, 1024);
 	dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	do{
+	do {
 		if (source == -1 || read_fd == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
