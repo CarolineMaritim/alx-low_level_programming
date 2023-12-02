@@ -1,5 +1,5 @@
 #include "hash_tables.h"
-
+#include <stdlib.h>
 /**
  * hash_table_create - Function that Creates a hash table.
  * @size: The size of the array.
